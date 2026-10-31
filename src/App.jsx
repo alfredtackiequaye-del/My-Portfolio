@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, ArrowUp, X, List, Plus, Minus, EnvelopeSimple, Phone, WhatsappLogo, LinkedinLogo, GithubLogo, MapPin, PaintBrush, Compass, ChartLineUp, SquaresFour, Check, Copy, CaretDown } from '@phosphor-icons/react';
 import { books, credentials, email, phone, services, studies, whatsapp } from './content';
 
-const nav = [['Work','work'],['About','about'],['Services','services'],['Books','books'],['Contact','contact']];
+const nav = [['Home','home'],['Work','work'],['About','about'],['Services','services'],['Books','books'],['Contact','contact']];
 const tools = [
   {name:'Photoshop',mark:'Ps',tone:'photoshop'},
   {name:'Illustrator',mark:'Ai',tone:'illustrator'},
@@ -63,7 +63,7 @@ function Header() {
     return ()=>{window.removeEventListener('keydown',key);window.removeEventListener('pointerdown',outside);};
   },[open]);
   return <header ref={header} className={`site-header ${scrolled || open ? 'header-solid' : ''}`}>
-    <div className="container header-inner"><Mark /><button ref={toggle} className="menu-toggle icon-button" aria-label={open?'Close menu':'Open menu'} aria-expanded={open} aria-controls="primary-nav" onClick={()=>setOpen(!open)}>{open?<X size={24}/>:<List size={24}/>}</button>
+    <div className="container header-inner"><Mark /><a className="mobile-home" href="#home" aria-current={active==='home'?'location':undefined} onClick={()=>setOpen(false)}>Home</a><button ref={toggle} className="menu-toggle icon-button" aria-label={open?'Close menu':'Open menu'} aria-expanded={open} aria-controls="primary-nav" onClick={()=>setOpen(!open)}>{open?<X size={24}/>:<List size={24}/>}</button>
       <nav id="primary-nav" className={open?'nav-open':''} aria-label="Main navigation">{nav.map(([label,id])=><a key={id} href={`#${id}`} aria-current={active===id?'location':undefined} onClick={()=>setOpen(false)}>{label}</a>)}</nav>
       <a className="button button-small header-cta" href="#contact">Let’s talk <ArrowRight size={18}/></a>
     </div>

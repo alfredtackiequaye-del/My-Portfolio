@@ -284,3 +284,12 @@ section{scroll-margin-top:0}.section-heading{display:flex;justify-content:space-
  .inquiry-actions .copy-inquiry {align-self:center;}
  .contact-intro .whatsapp-link {width:100%;justify-content:center;font-size:15px;}
 }
+
+/* An explicit route home from every section, including the mobile header. */
+.mobile-home {display:none;}
+@media(max-width:800px){
+ .header-inner {gap:16px;}
+ .mobile-home {display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-left:auto;font-size:14px;font-weight:700;}
+ .mobile-home[aria-current] {text-decoration:underline;text-underline-offset:6px;}
+ .menu-toggle {margin-left:0;}
+}

@@ -1,3 +1,11 @@
+# Explicit Home navigation
+
+Added Home as the first primary navigation item. Mobile also has a directly visible Home link beside the menu toggle, so returning home does not require opening the menu or discovering the logo link. Active-section styling includes Home; existing logo and footer home links retained.
+
+Production build and diff formatting passed. Browser checks at 1440/1024/390/320px verify Home returns to scroll position zero from Work, About, Services, Process, Books, and Contact, with no horizontal overflow. Mobile menu Home closes the menu. Smallest-mobile screenshot in `qa/home-navigation/320.png` visually inspected; other width captures saved alongside it.
+
+---
+
 # Contact — approved clarity and fallback refinements
 
 Final result: passed. Increased labels to 14px, footer guidance to 13–14px, and status messages to 14px. Added draft preparation instructions before the fields (15px desktop / 16px mobile), linked to the form with aria-describedby. WhatsApp is now a clear bordered action and spans the mobile content width.
