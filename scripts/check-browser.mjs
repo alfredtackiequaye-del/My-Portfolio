@@ -1,0 +1,80 @@
+import {browserOptions} from './browser.mjs';
+import { chromium } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+
+await mkdir('qa',{recursive:true});
+const browser=await chromium.launch(browserOptions());
+const results=[],errors=[];
+const page=await browser.newPage({viewport:{width:1440,height:1800},deviceScaleFactor:1,reducedMotion:'reduce'});
+page.on('pageerror',error=>errors.push(error.message));
+page.on('console',message=>{if(message.type()==='error')errors.push(message.text()+' '+message.location().url);});
+await page.goto('http://127.0.0.1:3002/',{waitUntil:'networkidle'});
+await page.evaluate(()=>document.fonts.ready);
+await page.locator('.hero-art').evaluate(img=>img.decode());
+await page.locator('.project-image img').first().evaluate(img=>img.decode());
+await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
+await page.waitForTimeout(150);
+assert.equal(await page.getByRole('navigation').getByRole('link',{name:'Contact',exact:true}).getAttribute('aria-current'),'location');
+await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(150);
+const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(img=>img.complete&&!img.naturalWidth).map(img=>img.src));
+assert.deepEqual(broken,[]);results.push('All referenced images load.');
+await page.screenshot({path:'qa/desktop-opening.png'});
+for(const id of ['about','services','books','contact']){
+ await page.locator('#'+id).evaluate(el=>window.scrollTo(0,el.offsetTop-86));
+ await page.waitForTimeout(150);
+ await page.screenshot({path:`qa/desktop-${id}.png`,fullPage:false});
+}
+await page.getByRole('button',{name:'View Brand system study',exact:true}).click();
+await page.getByRole('dialog').filter({has:page.locator('#study-title')}).waitFor({state:'visible'});
+assert.match(await page.locator('#study-title').textContent(),/Brand system study/);
+await page.screenshot({path:'qa/project-dialog.png'});
+await page.keyboard.press('Escape');
+assert.equal(await page.locator('.study-dialog').evaluate(el=>el.open),false);results.push('Project opens, describes concept honestly, and closes with Escape.');
+const service=page.locator('details.service').first();
+await service.locator('summary').click();
+await service.getByRole('button',{name:'Discuss this service'}).click();
+assert.equal(await page.getByLabel('I’m interested in').inputValue(),'Brand identity & graphic design');results.push('Service expansion and inquiry preselection work.');
+await page.getByRole('button',{name:'Read about AI Prompt Engineering Mastery'}).click();
+assert.equal(await page.locator('.book-dialog').evaluate(el=>el.open),true);
+await page.getByRole('button',{name:'Close book details'}).click();results.push('Book details open and close with a book-specific email link.');
+await page.locator('.about-portrait').click();
+assert.equal(await page.locator('.about-portrait').getAttribute('aria-pressed'),'true');
+assert.equal(await page.locator('.about-portrait img').evaluate(el=>getComputedStyle(el).filter),'grayscale(0)');results.push('Portrait colour can be toggled with click and remains accessible.');
+await page.getByLabel('Your name').fill('Portfolio review');
+await page.getByLabel('Email address').fill('review@example.com');
+await page.getByLabel('A little about your project').fill('Review inquiry preparation without sending any email.');
+await page.getByRole('button',{name:'Prepare email'}).click();
+assert.match(await page.locator('.form-status').textContent(),/Your email draft is ready/);
+assert.match(await page.getByRole('link',{name:'Open email draft again'}).getAttribute('href'),/mailto:alfredtackiequaye@gmail.com/);results.push('Inquiry prepares a mailto draft; no email sent.');
+
+const mobile=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,reducedMotion:'reduce'});
+mobile.on('pageerror',e=>errors.push(e.message));
+await mobile.goto('http://127.0.0.1:3002/',{waitUntil:'networkidle'});await mobile.evaluate(()=>document.fonts.ready);
+await mobile.screenshot({path:'qa/mobile-opening.png'});
+await mobile.getByRole('button',{name:'Open menu'}).click();
+await mobile.screenshot({path:'qa/mobile-menu.png'});
+await mobile.getByRole('navigation').getByRole('link',{name:'About',exact:true}).click();
+assert.equal(await mobile.getByRole('button',{name:'Open menu'}).getAttribute('aria-expanded'),'false');
+await mobile.waitForTimeout(150);
+await mobile.screenshot({path:'qa/mobile-about.png'});results.push('Mobile menu opens and closes after navigation.');
+for(const width of [320,390,768,1024,1440]){
+ await mobile.setViewportSize({width,height:1000});
+ await mobile.goto('http://127.0.0.1:3002/',{waitUntil:'networkidle'});
+ const overflow=await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
+ assert.equal(overflow,false,`Horizontal overflow at ${width}px`);
+}
+results.push('No horizontal overflow at 320, 390, 768, 1024, or 1440 pixels.');
+await mobile.setViewportSize({width:390,height:844});
+await mobile.locator('#contact').evaluate(el=>window.scrollTo(0,el.offsetTop-72));await mobile.waitForTimeout(150);await mobile.screenshot({path:'qa/mobile-contact.png'});
+// Use a normal motion desktop context to check actual hover treatment.
+const hover=await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:1});
+await hover.goto('http://127.0.0.1:3002/',{waitUntil:'networkidle'});
+await hover.locator('#about').scrollIntoViewIfNeeded();await hover.locator('.about-portrait').hover();await hover.waitForTimeout(1000);
+assert.equal(await hover.locator('.about-portrait img').evaluate(el=>getComputedStyle(el).filter),'grayscale(0)');
+await hover.screenshot({path:'qa/portrait-hover.png'});results.push('Fine-pointer hover reveals portrait colour.');
+await hover.close();
+assert.deepEqual(errors,[]);results.push('No browser console or page errors.');
+await writeFile('qa/browser-results.json',JSON.stringify({results,errors},null,2));
+console.log(JSON.stringify({results,errors},null,2));
+await browser.close();
