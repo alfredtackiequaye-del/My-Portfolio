@@ -39,3 +39,27 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 - Move the desktop hero portrait slightly left (36px; 24px at tablet widths) while preserving the mobile composition. Increase hero orbit visibility modestly (overall opacity 0.8).
 - Use the shared orbital component in all main content sections. On ivory/grey sections use muted ink-blue/brass; on navy/cobalt use pale blue/brass. Keep content on top, alternate orientation, pause off-screen animations, and hide all patterns for reduced motion.
+
+- Page-by-page client review: finish Home before moving on. Home refinements approved: make the supporting copy explain recognisable brands, useful experiences, and actionable Power BI dashboards; enlarge the mobile identity line and supporting text; provide a quiet direct project-inquiry link beside/below the work CTA.
+- Hero dashboard palette: keep blue dominant, adding restrained teal, warm gold, and soft lavender accents inside the screen. Use `cobalt-hero-colour.png`; preserve the original asset as a reference. Other sections are outside this review pass.
+
+- Selected Work review approved: named, clearly labelled concept studies; explain visible design decisions, study format/scope, and what is shown. Do not invent tool use, research, client outcomes, or completed production deliverables.
+- Keep the project close control sticky and mobile detail copy readable. Project inquiries must preselect the matching service and carry the project title into a visible, removable reference and the email draft, without overwriting a visitor’s message. Remove the unfinished/case-studies-coming-later footer.
+
+- Section identification: use clear, consistently visible section names (Selected Work, About Me, Services, My Process, Books, Contact), separate from the larger editorial headlines. Keep active navigation prominent.
+
+- Approved About refinement: retain portrait/headline, use a concise introduction and three client benefits (brand recognition, clear digital journeys, actionable data). Keep supporting mobile copy at least 16px and provide contact plus Selected Work actions. Do not invent results or credentials.
+
+- Everyday toolkit should stand out beneath the portrait: navy panel, readable heading/tool names, restrained coloured abbreviation tiles, subtle hover lift and reduced-motion support. Keep tools as informational items rather than fake buttons or skill ratings.
+
+- Approved mobile About order: portrait, introduction/benefits/actions, then toolkit. Keep one toolkit in the document and retain its position under the portrait on desktop.
+
+- Approved Services refinement: preserve numbered expandable rows; show deliverable previews while collapsed, use the explicit Power BI dashboards & data storytelling title, label expanded deliverables What you receive, enlarge mobile text, and add a Help me choose inquiry that clears prior project references. Keep data study service matching the updated form option.
+
+- Certificate visibility: use prominent readable cards for PL-300, DP-700, SC-900 and ITIL. Add the four-colour Microsoft mark to the three Microsoft entries only. Retain professional-learning context; do not invent verification links, award dates, or badge evidence.
+
+- Process refinement approved: explain the agreed brief, scope/review points, design decisions, feedback/refinement, and file/report handover. Use a single-column numbered mobile sequence with 16px descriptions and a contact action. Preserve certificate cards.
+
+- Approved Books refinement: display existing short descriptions beneath titles; use single-column covers on small phones (600px and below); increase detail text to 16px and label book inquiries Ask about availability. Preserve actual covers and book-specific mailto subjects; no prices, formats, purchase links, or availability claims invented.
+
+- Approved Contact refinements: readable form labels/instructions; explain draft preparation above fields; add Copy inquiry using the same validated, current payload as email preparation, with selectable text on clipboard failure. Preserve project reference and typed message. Make WhatsApp more visible on mobile. No message is sent by the form itself.

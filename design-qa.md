@@ -1,3 +1,142 @@
+# Contact — approved clarity and fallback refinements
+
+Final result: passed. Increased labels to 14px, footer guidance to 13–14px, and status messages to 14px. Added draft preparation instructions before the fields (15px desktop / 16px mobile), linked to the form with aria-describedby. WhatsApp is now a clear bordered action and spans the mobile content width.
+
+Added Copy inquiry using the same validated payload as Prepare email: recipient, subject, visitor details, selected service, project reference when present, and current message. Clipboard failure reveals focused, selected read-only inquiry text for manual copying. Draft/status/fallback clear when fields, service, or project context change, preventing stale drafts. No automatic sending was added.
+
+Validation: production build, `npm run test:contact`, broad browser interactions, Selected Work inquiry regression checks, and diff formatting all passed. Contact checks at 1440/768/390/320px cover required-field validation, prepared email content, simulated clipboard success/failure, manual selection, changed message content, retained project context, readable labels, and overflow. No page errors or emails sent. Clipboard outcomes were simulated for repeatable success/failure coverage; user browser permissions determine actual clipboard access.
+
+Desktop and mobile full-section captures in `qa/contact-refinements/` visually inspected. Screenshots include populated project-reference and copied states; fixed header hidden only during tall section captures.
+
+---
+
+# Books — approved refinements
+
+Added the existing book descriptions beneath all four gallery titles, aligned desktop actions, enlarged topic/action text, and switched to a single-column gallery at 600px and below. Mobile descriptions use 16px text; detail descriptions use 16px at every width. Book-specific email actions now say Ask about availability. Original covers, titles, and email subjects retained. No availability, format, price, or purchase claims added.
+
+Production build and `npm run test:books` pass. Targeted checks at 1440/768/390/320px cover four visible descriptions, single-column small-screen order, minimum mobile/detail text size, all four book-specific inquiry subjects, reachable close control, Escape/focus return, and no horizontal overflow; no page errors. Desktop and mobile gallery and smallest-mobile detail captures in `qa/books-refinements/` visually inspected. Fixed header hidden only during full-gallery captures. No email sent.
+
+---
+
+# Process explanations — applied
+
+Added concrete descriptions of the agreed brief, planning/scope, shared design direction, feedback/refinement, and handover. Added a project inquiry action and #process anchor. Retained the five stages and certificate cards. Desktop uses five columns; mobile uses a numbered single-column sequence with 16px descriptions.
+
+Production build and formatting checks passed. Browser checks at 1440/390/320px verify all five stages, retained four certificate cards, working Contact action, no horizontal overflow, and vertically ordered mobile steps. Desktop and mobile section screenshots in `qa/process-refinements/` inspected. Fixed navigation hidden during tall section captures only.
+
+---
+
+# Certificate visibility refinement
+
+Replaced the small qualification-code row with four prominent navy cards, a clear Certifications & professional learning heading, 25px codes, and readable descriptions (16px mobile). Three Microsoft entries carry an inline four-colour Microsoft mark; ITIL retains its own neutral icon. Original qualification titles retained, with no added dates or verification claims.
+
+Production build and diff formatting passed. Browser checks at 1440/1024/390/320px verify four cards, exactly three Microsoft marks, readable mobile descriptions, and no horizontal overflow. Desktop and mobile evidence in `qa/credentials/` visually inspected. Cards stack on phones and retain a four-column desktop layout. This pass addresses the certificate presentation; process-stage review recommendations remain separate.
+
+---
+
+# Services — approved client-focused refinements
+
+Final result: passed. Retained the numbered, expandable service layout and section headline. Added visible deliverable previews to all four collapsed rows; renamed the data offer Power BI dashboards & data storytelling; expanded details now have a What you receive heading and readable list. Mobile descriptions and deliverables use 16px type. A quiet guidance row leads undecided visitors into Contact with Help me choose selected, preserving their typed message and clearing any prior concept reference through the existing inquiry handler.
+
+Updated the data concept’s service reference and project inquiry regression checks to match the renamed form option.
+
+Evidence: `qa/services-refinements/` captures desktop 1440px, tablet 1024px, mobile 390px, and small mobile 320px overview and open data-service states, plus results.json. Full-section overview captures temporarily hide fixed header/skip-link overlays during capture only. Mobile overview and smallest-mobile expanded detail visually inspected for wrapping, spacing, and readable deliverables.
+
+Passed: production build; `npm run test:services` (all service selections, visible previews, What you receive lists, mobile font size, help-to-choose selection, message preservation, keyboard expansion, and overflow); Selected Work regression checks; broad browser interactions with no console/page errors; git diff formatting. No email sent. Awaiting user review of Services before moving onward.
+
+---
+
+# About mobile reading order — applied
+
+Moved the single toolkit element after About copy in document order. CSS grid keeps it directly beneath the portrait on desktop; mobile now reads portrait → introduction and benefits → project actions → toolkit. Both desktop and mobile full-section captures in `qa/section-labels-about-review/` inspected for the updated order and spacing.
+
+Production build, toolkit checks at 320/390/1024/1440px, section/link checks at desktop/tablet/mobile, and diff formatting checks passed. No overflow; six tools, hover, reduced motion, and both About actions retained. This is a layout-only refinement.
+
+---
+
+# Everyday toolkit visibility refinement
+
+Passed production build and targeted browser checks (`node scripts/check-toolkit.mjs`). The toolkit now uses a navy panel, 20px heading, six readable tool names (13–14px), coloured typographic abbreviation tiles, and a subtle hover lift. Items remain semantic list entries. Reduced motion disables the lift. No skill ratings or claims were added.
+
+Screenshots in `qa/toolkit/` cover 1440, 1024, 390, and 320px widths; desktop and smallest mobile captures visually inspected. All six tools remain readable without panel or page overflow. Desktop hover and reduced-motion behavior verified. About content, portrait, and inquiry actions retained.
+
+---
+
+# About — approved client-focused refinement
+
+Final result: passed.
+
+Retained Alfred’s portrait, monochrome-to-colour interaction, headline, and toolkit. Replaced the long introduction with concise positioning and three numbered benefit rows: recognisable brand, clear digital journeys, and actionable data. Added a short audience-first approach statement. Contact is the primary action; Selected Work is the quiet secondary action. No client results, credentials, or experience claims were invented.
+
+Mobile benefit and approach copy is 16px; benefit headings are 18px. Rows use subtle rules and brass numbers rather than additional cards. Inspected the updated full About captures at desktop and mobile in `qa/section-labels-about-review/`; these now represent this revision. Tablet captures also generated. Existing historical findings below describe the earlier version.
+
+Validation: production build, `node scripts/check-section-labels.mjs`, `node scripts/check-browser.mjs`, and `git diff --check` passed. Targeted checks verify both About links, three benefits, minimum mobile copy size, clear section names, and no overflow at desktop/tablet/mobile widths. Broad checks preserve project/book interactions, contact preparation, menu, and portrait interaction with no browser errors. No email sent.
+
+Awaiting user visual review of About; no later section was redesigned in this pass.
+
+---
+
+# Section identification and About review
+
+Section-name update passed desktop (1440px), tablet (1024px), and mobile (390px) capture and behavior checks. Explicit names use 16px desktop/15px mobile bold blue type, or white on dark backgrounds. Current navigation uses bold text and a thicker underline. About Me now precedes the portrait on mobile rather than appearing after the toolkit. Body text and the larger introductory paragraph retain their styles.
+
+Current evidence: `qa/section-labels-about-review/` contains section-entry captures and full About captures at all three widths, plus inquiry-action captures and `results.json`. Desktop and mobile full About screenshots inspected. Section names are readable and no horizontal overflow was observed. About’s inquiry link reaches Contact. Broad browser interactions passed with no page/console errors; final production build passed.
+
+About review, from a prospective client’s perspective:
+1. Entry: real portrait, explicit section name, strong headline, and balanced desktop columns establish identity well. Mobile shows the name before the image.
+2. Read: the opening explains design/data and client needs. Three long paragraphs make the section slower to scan, especially on mobile; body text is 14px. Recommend concise introduction plus three clear client benefits, with 16px mobile body copy.
+3. Decide: inquiry action works. Add a quiet link to Selected Work so readers can inspect the concept examples before contacting Alfred. Toolkit chips show breadth, but do not establish project results; keep real project evidence for when supplied, without inventing credentials or outcomes.
+
+Scope: section-name changes applied; further About copy/layout recommendations are review findings awaiting user direction. Screenshots and functional checks do not establish full accessibility compliance or validate professional claims.
+
+---
+
+# Selected Work — approved client-focused refinements
+
+Final result: passed targeted desktop and mobile verification; visual review complete.
+
+- Named the two studies Cobalt and Business overview, with clear concept categories.
+- Added the brief, three visible design decisions, presentation contents, and scope to each project detail. No client outcomes, tool use, or working report claims were added.
+- Added a sticky project toolbar with a 44px close control. Mobile detail copy is 16px; desktop copy is 15px.
+- Removed the unfinished case-study footer.
+- Project inquiries preselect the matching service and carry a visible, removable project reference into the email subject and body. Existing visitor text is preserved.
+
+Evidence: `qa/selected-work-refinements/` contains desktop (1440 × 1000) and mobile (390 × 844) gallery, detail, and inquiry captures plus `results.json`. Inspected the desktop gallery and detail, and the mobile detail bottom: hierarchy, spacing, readable copy, and reachable close control are consistent.
+
+`npm run test:work` passes: both project flows, retained visitor message, removable reference, prepared email contents, Escape dismissal/focus return, mobile text size, and no horizontal overflow. No page errors. Production build passed after the implementation. No email was sent.
+
+The concept presentations remain illustrative; authentic project evidence can be incorporated when supplied. This section awaits the user’s visual review before moving to About.
+
+---
+
+# Home — approved client-focused refinements
+
+final result: passed
+
+The user approved three homepage review recommendations and requested a little more colour in the laptop dashboard. This pass is limited to Home; the remaining sections await their own review.
+
+## Changes and evidence
+
+- Supporting copy now explains recognisable brands, useful digital experiences, and Power BI dashboards that make information easier to act on.
+- Identity line is 12px on desktop and 11px on mobile; supporting copy remains at least 16px. Pretty wrapping prevents a single-word final line.
+- Added a quiet `Discuss your project` link alongside/below the primary Work action. It navigates directly to Contact on every tested screen size.
+- Edited the existing hero artwork using ImageGen: the dashboard retains its blue/white structure with restrained teal, gold, and lavender chart accents. New asset: `public/images/cobalt-hero-colour.png`; original retained. The surrounding scene remains consistent in composition and art direction.
+- Baseline capture: `qa/home-refinement/client-review-home-desktop.png` (1440 × 1000).
+- Current captures: `qa/home-client-refinements/desktop.png` (1440 × 1000), `tablet.png` (1024 × 1000), and `mobile.png` (390 × 1000), all density 1.
+- Combined comparison: `qa/home-refinement/home-client-after-comparison.png`, both desktop states at equal scale; full-resolution captures inspected for typography, spacing, colour, image fidelity, and copy wrapping.
+
+## Assessment and validation
+
+The approved headline, portrait hierarchy, orbital pattern, and section rhythm remain coherent. Supporting copy is more specific and legible; the quiet second action is available without competing with the main button. The dashboard accents are visible but subordinate to the portrait/headline. No text/image collision or horizontal overflow observed.
+
+Targeted checks pass (`qa/home-client-refinements/home-checks.log`), verifying offer copy, font sizes, new artwork loading, working contact link, and overflow at desktop/tablet/mobile widths. Existing browser interaction checks also pass with no console or page errors (`browser-checks.log`). Production build passes (`build.log`). The targeted check can be rerun with `npm run test:home`.
+
+No actionable P0/P1/P2 findings remain for this pass. Home remains awaiting the user’s visual approval before reviewing Selected Work.
+
+---
+
+Historical verification follows.
+
 # Shared orbital system and portrait alignment — current revision
 
 final result: passed

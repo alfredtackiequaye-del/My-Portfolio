@@ -25,9 +25,9 @@ for(const id of ['about','services','books','contact']){
  await page.waitForTimeout(150);
  await page.screenshot({path:`qa/desktop-${id}.png`,fullPage:false});
 }
-await page.getByRole('button',{name:'View Brand system study',exact:true}).click();
+await page.getByRole('button',{name:'View Cobalt — Brand Identity Concept',exact:true}).click();
 await page.getByRole('dialog').filter({has:page.locator('#study-title')}).waitFor({state:'visible'});
-assert.match(await page.locator('#study-title').textContent(),/Brand system study/);
+assert.match(await page.locator('#study-title').textContent(),/Cobalt — Brand Identity Concept/);
 await page.screenshot({path:'qa/project-dialog.png'});
 await page.keyboard.press('Escape');
 assert.equal(await page.locator('.study-dialog').evaluate(el=>el.open),false);results.push('Project opens, describes concept honestly, and closes with Escape.');

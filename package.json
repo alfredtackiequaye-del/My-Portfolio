@@ -10,7 +10,12 @@
     "test:sites": "node --test tests/sites-worker.test.mjs",
     "test:browser": "node scripts/check-browser.mjs && node scripts/compare-design.mjs",
     "test:portrait-motion": "node scripts/check-portrait-motion.mjs",
-    "test:section-orbits": "node scripts/check-section-orbits.mjs"
+    "test:section-orbits": "node scripts/check-section-orbits.mjs",
+    "test:home": "node scripts/check-home-refinements.mjs",
+    "test:work": "node scripts/check-selected-work.mjs",
+    "test:services": "node scripts/check-services.mjs",
+    "test:books": "node scripts/check-books.mjs",
+    "test:contact": "node scripts/check-contact.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.3.0",
