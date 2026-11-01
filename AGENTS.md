@@ -65,3 +65,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Approved Contact refinements: readable form labels/instructions; explain draft preparation above fields; add Copy inquiry using the same validated, current payload as email preparation, with selectable text on clipboard failure. Preserve project reference and typed message. Make WhatsApp more visible on mobile. No message is sent by the form itself.
 
 - Return-home navigation: include Home explicitly in the desktop/mobile menus, plus an always-visible Home link beside the mobile menu toggle. Preserve the logo home link and active-section indication.
+
+- Final polish and publishing readiness: verified all assets and code, added social preview meta tags (Open Graph and Twitter cards) to `index.html`, validated build artifacts (`dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`), and confirmed all Sites worker packaging tests pass.
