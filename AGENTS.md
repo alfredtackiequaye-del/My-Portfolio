@@ -67,3 +67,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Return-home navigation: include Home explicitly in the desktop/mobile menus, plus an always-visible Home link beside the mobile menu toggle. Preserve the logo home link and active-section indication.
 
 - Final polish and publishing readiness: verified all assets and code, added social preview meta tags (Open Graph and Twitter cards) to `index.html`, validated build artifacts (`dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`), and confirmed all Sites worker packaging tests pass.
+
+- Real book store links added: integrated direct purchase links and platform badges (Amazon for Generational Assignment and AI Knowledge-to-Income Blueprint; Selar for AI Productivity Mastery and AI Prompt Engineering Mastery) while preserving custom email availability inquiries.
