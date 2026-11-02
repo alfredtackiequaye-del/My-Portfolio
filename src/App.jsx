@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, ArrowUp, X, List, Plus, Minus, EnvelopeSimple, Phone, WhatsappLogo, LinkedinLogo, GithubLogo, MapPin, PaintBrush, Compass, ChartLineUp, SquaresFour, Check, Copy, CaretDown } from '@phosphor-icons/react';
 import { books, credentials, email, phone, services, studies, whatsapp } from './content';
 
+const formspreeEndpoint='https://formspree.io/f/mwllwnpz';
 const nav = [['Home','home'],['Work','work'],['About','about'],['Services','services'],['Books','books'],['Contact','contact']];
 const toolGroups = [
   {label:'Design', note:'Brand and interface', tools:[
@@ -122,7 +123,7 @@ function StudyModal({study,onClose,onInquire}) {
 }
 
 function Contact({selectedService,setSelectedService,projectContext,onClearProject}) {
-  const [notice,setNotice]=useState(''),[draft,setDraft]=useState(''),[copied,setCopied]=useState(false),[fallback,setFallback]=useState('');
+  const [notice,setNotice]=useState(''),[draft,setDraft]=useState(''),[copied,setCopied]=useState(false),[fallback,setFallback]=useState(''),[sending,setSending]=useState(false),[sent,setSent]=useState(false);
   useEffect(()=>{setNotice('');setDraft('');setFallback('');},[selectedService,projectContext]);
   const fallbackRef=useRef(null);
   useEffect(()=>{if(fallback){fallbackRef.current?.focus();fallbackRef.current?.select();}},[fallback]);
@@ -134,11 +135,19 @@ function Contact({selectedService,setSelectedService,projectContext,onClearProje
     const body=`Hello Alfred,\n\nName: ${data.get('name')}\nEmail: ${data.get('email')}\nArea of interest: ${service}\n${project ? `Reference concept: ${project}\n` : ''}\n${data.get('message')}\n`;
     return {subject,body};
   }
-  function submit(e){
-    e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;
+  async function submit(e){
+    e.preventDefault();const form=e.currentTarget;if(!form.reportValidity()||sending)return;
     const {subject,body}=inquiry(form);
+    const data=new FormData(form);data.set('_subject',subject);
     const url=`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setDraft(url);setFallback('');setNotice('Your email draft is ready. Review and send it in your email app. If it does not open, use Copy inquiry.');window.location.href=url;
+    setSending(true);setSent(false);setFallback('');setNotice('');setDraft('');
+    try{
+      const res=await fetch(formspreeEndpoint,{method:'POST',body:data,headers:{Accept:'application/json'}});
+      if(!res.ok)throw new Error('Formspree '+res.status);
+      form.elements.message.value='';setSent(true);
+    }catch{
+      setDraft(url);setNotice('Your message could not be sent just now. Nothing was lost: use Copy inquiry, or open an email draft instead.');
+    }finally{setSending(false);}
   }
   async function copyInquiry(e){
     const form=e.currentTarget.form;if(!form.reportValidity())return;
@@ -149,7 +158,7 @@ function Contact({selectedService,setSelectedService,projectContext,onClearProje
   }
   async function copy(){try{await navigator.clipboard.writeText(email);setCopied(true);setTimeout(()=>setCopied(false),2200);}catch{setNotice('You can email me directly at '+email);}}
   return <section className="contact-section orbit-surface" id="contact" aria-labelledby="contact-heading"><OrbitPattern tone="light" side="right"/><div className="container contact-grid"><Reveal className="contact-intro"><SectionLabel light>Contact</SectionLabel><h2 id="contact-heading">Good things start<br/>with a <em>conversation.</em></h2><p>A brand to build. An experience to improve. A story hiding in your data. Tell me what you have in mind.</p><div className="contact-links"><div><EnvelopeSimple size={22}/><a href={`mailto:${email}`}>{email}</a><button className="icon-button" onClick={copy} aria-label="Copy email">{copied?<Check size={18}/>:<Copy size={18}/>}</button></div><div><Phone size={22}/><a href="tel:+233240791866">{phone}</a></div><div><MapPin size={22}/><span>Accra, Ghana · Available worldwide</span></div></div><p role="status" className="copy-status">{copied?'Email copied.':''}</p><a className="whatsapp-link" href={whatsapp} target="_blank" rel="noreferrer"><WhatsappLogo size={20}/>Prefer WhatsApp? Let’s chat <ArrowUpRight size={17}/></a></Reveal>
-    <Reveal><form className="contact-form" onSubmit={submit} aria-describedby="contact-instructions" onChange={()=>{setNotice('');setDraft('');setFallback('');}}><div className="form-heading"><span>YOUR NEXT PROJECT</span><h3>What are we creating?</h3><p id="contact-instructions">Complete the fields to prepare an email draft. You’ll review and send it in your email app.</p></div>{projectContext&&<div className="inquiry-context"><div><span>Inspired by</span><strong>{projectContext.title}</strong></div><button type="button" className="icon-button" aria-label="Clear project reference" onClick={onClearProject}><X size={18}/></button><input type="hidden" name="project" value={projectContext.title}/></div>}<div className="form-row"><label>Your name<input name="name" required autoComplete="name" maxLength={120} placeholder="Full name"/></label><label>Email address<input name="email" type="email" required autoComplete="email" maxLength={200} placeholder="you@company.com"/></label></div><label>I’m interested in<select name="service" required value={selectedService} onChange={e=>setSelectedService(e.target.value)}><option value="" disabled>Select an area</option>{services.map(s=><option key={s.number}>{s.title}</option>)}<option>Books & writing</option><option>Other collaboration</option><option>Help me choose</option></select></label><label>A little about your project<textarea name="message" rows={4} required minLength={10} maxLength={5000} placeholder="Your idea, your challenge, or what you’d like to achieve…"/></label><div className="form-footer"><p>You choose when to send.<br/>No email app? Copy your inquiry instead.</p><div className="inquiry-actions"><button className="button button-blue" type="submit">Prepare email <ArrowUpRight size={18}/></button><button className="text-link copy-inquiry" type="button" onClick={copyInquiry}>Copy inquiry <Copy size={17}/></button></div></div><div role="status" className="form-status">{notice}{draft&&<> <a href={draft}>Open email draft again</a></>}</div>{fallback&&<label className="inquiry-fallback">Your inquiry text<textarea ref={fallbackRef} readOnly value={fallback} rows={8}/></label>}</form></Reveal></div></section>;
+    <Reveal><form className="contact-form" onSubmit={submit} aria-describedby="contact-instructions" onChange={()=>{setNotice('');setDraft('');setFallback('');setSent(false);}}><div className="form-heading"><span>YOUR NEXT PROJECT</span><h3>What are we creating?</h3><p id="contact-instructions">Share a few details and send your message straight to Alfred. You’ll get a reply by email.</p></div>{projectContext&&<div className="inquiry-context"><div><span>Inspired by</span><strong>{projectContext.title}</strong></div><button type="button" className="icon-button" aria-label="Clear project reference" onClick={onClearProject}><X size={18}/></button><input type="hidden" name="project" value={projectContext.title}/></div>}<div className="form-row"><label>Your name<input name="name" required autoComplete="name" maxLength={120} placeholder="Full name"/></label><label>Email address<input name="email" type="email" required autoComplete="email" maxLength={200} placeholder="you@company.com"/></label></div><label>I’m interested in<select name="service" required value={selectedService} onChange={e=>setSelectedService(e.target.value)}><option value="" disabled>Select an area</option>{services.map(s=><option key={s.number}>{s.title}</option>)}<option>Books & writing</option><option>Other collaboration</option><option>Help me choose</option></select></label><label>A little about your project<textarea name="message" rows={4} required minLength={10} maxLength={5000} placeholder="Your idea, your challenge, or what you’d like to achieve…"/></label><div className="form-footer"><p>Your details are used only to reply to this inquiry.<br/>Prefer your own email app? Copy your inquiry instead.</p><div className="inquiry-actions"><button className="button button-blue" type="submit" disabled={sending}>{sending?'Sending…':'Send message'} <ArrowUpRight size={18}/></button><button className="text-link copy-inquiry" type="button" onClick={copyInquiry}>Copy inquiry <Copy size={17}/></button></div></div><div role="status" className="form-status">{sent&&'Thank you. Your message has been sent and Alfred will reply by email.'}{notice}{draft&&<> <a href={draft}>Open email draft</a></>}</div>{fallback&&<label className="inquiry-fallback">Your inquiry text<textarea ref={fallbackRef} readOnly value={fallback} rows={8}/></label>}</form></Reveal></div></section>;
 }
 
 export function App() {

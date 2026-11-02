@@ -62,7 +62,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 - Approved Books refinement: display existing short descriptions beneath titles; use single-column covers on small phones (600px and below); increase detail text to 16px and label book inquiries Ask about availability. Preserve actual covers and book-specific mailto subjects; no prices, formats, purchase links, or availability claims invented.
 
-- Approved Contact refinements: readable form labels/instructions; explain draft preparation above fields; add Copy inquiry using the same validated, current payload as email preparation, with selectable text on clipboard failure. Preserve project reference and typed message. Make WhatsApp more visible on mobile. No message is sent by the form itself.
+- Approved Contact refinements: readable form labels/instructions; explain draft preparation above fields; add Copy inquiry using the same validated, current payload as email preparation, with selectable text on clipboard failure. Preserve project reference and typed message. Make WhatsApp more visible on mobile. Update: the form now sends via Formspree (https://formspree.io/f/mwllwnpz) with a Send message button; on failure it falls back to the email draft and Copy inquiry.
 
 - Return-home navigation: include Home explicitly in the desktop/mobile menus, plus an always-visible Home link beside the mobile menu toggle. Preserve the logo home link and active-section indication.
 
