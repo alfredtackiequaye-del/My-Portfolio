@@ -50,7 +50,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 - Approved About refinement: retain portrait/headline, use a concise introduction and three client benefits (brand recognition, clear digital journeys, actionable data). Keep supporting mobile copy at least 16px and provide contact plus Selected Work actions. Do not invent results or credentials.
 
-- Everyday toolkit should stand out beneath the portrait: navy panel, readable heading/tool names, restrained coloured abbreviation tiles, subtle hover lift and reduced-motion support. Keep tools as informational items rather than fake buttons or skill ratings.
+- Everyday toolkit should stand out beneath the portrait in a premium white/light-grey panel with readable heading/tool names, brand-style tool icons (Design and Data groups), subtle hover lift and reduced-motion support. Keep tools as informational items rather than fake buttons or skill ratings. On desktop/tablet keep the panel compact (side-by-side groups, no role lines) so it does not outgrow the About copy column; mobile keeps role lines.
 
 - Approved mobile About order: portrait, introduction/benefits/actions, then toolkit. Keep one toolkit in the document and retain its position under the portrait on desktop.
 

@@ -165,18 +165,18 @@ section{scroll-margin-top:0}.section-heading{display:flex;justify-content:space-
 }
 @media(max-width:420px){.about-actions {align-items:flex-start;flex-direction:column;}.about-actions .button {white-space:normal;text-align:left;}}
 
-/* Toolkit: a visible companion panel to the portrait. */
-.about-toolkit {margin-top:20px;padding:22px;background:#17243c;color:#fff;border:1px solid #263650;border-top:2px solid #b99559;border-radius:12px;box-shadow:0 10px 25px #10152e0a;}
+/* Toolkit: a light, refined companion panel to the portrait. */
+.about-toolkit {margin-top:20px;padding:22px;background:#fff;color:#10152e;border:1px solid #deddd7;border-top:2px solid #b99559;border-radius:12px;box-shadow:0 10px 25px #10152e0a;}
 .about-toolkit>.toolkit-heading {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
-.toolkit-heading>svg {color:#d2b47e;flex-shrink:0;}
-.toolkit-heading p {margin-bottom:6px;color:#d2b47e;font-size:10px;line-height:1.5;font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+.toolkit-heading>svg {color:#926c32;flex-shrink:0;}
+.toolkit-heading p {margin-bottom:6px;color:#80602e;font-size:10px;line-height:1.5;font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
 .toolkit-heading h3 {font-size:20px;line-height:1.35;letter-spacing:-.025em;text-wrap:pretty;}
 .toolkit-list {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;margin:0;padding:0;}
-.toolkit-item {--tool-accent:#b7ceff;display:flex;align-items:center;gap:10px;min-width:0;min-height:65px;padding:11px;background:#ffffff08;border:1px solid #ffffff1f;border-radius:7px;transition:background .25s,border-color .25s,transform .25s;}
-.toolkit-mark {display:grid;place-items:center;flex-shrink:0;width:32px;height:34px;border-radius:5px;background:#ffffff0c;border:1px solid #ffffff17;color:var(--tool-accent);font-size:14px;font-weight:800;letter-spacing:-.04em;}
+.toolkit-item {--tool-accent:#315b9b;display:flex;align-items:center;gap:10px;min-width:0;min-height:65px;padding:11px;background:#f8f8f6;border:1px solid #e8e7e2;border-radius:7px;transition:background .25s,border-color .25s,transform .25s,box-shadow .25s;}
+.toolkit-mark {display:grid;place-items:center;flex-shrink:0;width:32px;height:34px;border-radius:5px;background:color-mix(in srgb,var(--tool-accent) 9%,white);border:1px solid color-mix(in srgb,var(--tool-accent) 16%,white);color:var(--tool-accent);font-size:14px;font-weight:800;letter-spacing:-.04em;}
 .toolkit-name {font-size:13px;font-weight:650;line-height:1.5;}
-.toolkit-photoshop {--tool-accent:#78c9ff;}.toolkit-illustrator {--tool-accent:#ffbc67;}.toolkit-figma {--tool-accent:#d1b2ff;}.toolkit-powerbi {--tool-accent:#f5d56b;}.toolkit-fabric {--tool-accent:#7ee2c6;}.toolkit-security {--tool-accent:#9ebeff;}
-@media(hover:hover) and (pointer:fine){.toolkit-item:hover {background:#ffffff12;border-color:var(--tool-accent);transform:translateY(-2px);}.toolkit-item:hover .toolkit-mark {background:#ffffff16;}}
+.toolkit-photoshop {--tool-accent:#1469a7;}.toolkit-illustrator {--tool-accent:#925000;}.toolkit-figma {--tool-accent:#7045a4;}.toolkit-powerbi {--tool-accent:#806000;}.toolkit-fabric {--tool-accent:#08765e;}.toolkit-security {--tool-accent:#315b9b;}
+@media(hover:hover) and (pointer:fine){.toolkit-item:hover {background:#fff;border-color:color-mix(in srgb,var(--tool-accent) 35%,#e8e7e2);box-shadow:0 5px 14px #10152e0c;transform:translateY(-2px);}}
 @media(max-width:1100px) and (min-width:801px){.about-toolkit {padding:18px;}.toolkit-list {grid-template-columns:minmax(0,1fr);}}
 @media(max-width:800px){.about-toolkit {padding:22px;margin-top:18px;}.toolkit-name {font-size:14px;}}
 @media(max-width:360px){.about-toolkit {padding:16px;}.toolkit-item {padding:9px;gap:8px;}.toolkit-name {font-size:13px;}.toolkit-mark {width:28px;}}
@@ -292,4 +292,54 @@ section{scroll-margin-top:0}.section-heading{display:flex;justify-content:space-
  .mobile-home {display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-left:auto;font-size:14px;font-weight:700;}
  .mobile-home[aria-current] {text-decoration:underline;text-underline-offset:6px;}
  .menu-toggle {margin-left:0;}
+}
+
+/* Toolkit: original brand icons replace abbreviation tiles. */
+.toolkit-mark {background:#fff;border-color:#e3e2dc;padding:4px;}
+.toolkit-mark svg {display:block;width:100%;height:100%;}
+
+/* Toolkit v2: grouped, icon-led showcase panel. */
+.about-toolkit {position:relative;overflow:hidden;padding:28px 26px 26px;background:linear-gradient(180deg,#fff 0%,#fbfaf7 100%);border:1px solid #e1dfd7;border-top:3px solid #b99559;border-radius:14px;box-shadow:0 22px 48px -22px #10152e40,0 2px 6px #10152e0a;}
+.about-toolkit::before {content:'';position:absolute;inset:0 0 auto auto;width:180px;height:180px;background:radial-gradient(circle at 100% 0,#b9955924,transparent 70%);pointer-events:none;}
+.about-toolkit>* {position:relative;}
+.about-toolkit>.toolkit-heading {margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid #ebe9e2;}
+.toolkit-heading h3 {font-size:24px;letter-spacing:-.03em;}
+.about-toolkit>.toolkit-groups {display:grid;flex-wrap:nowrap;gap:22px;}
+.toolkit-group-head {display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;}
+.toolkit-group-head span {color:#10152e;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;}
+.toolkit-group-head small {color:#6b6f7c;font-size:12px;font-weight:500;}
+.toolkit-list {grid-template-columns:minmax(0,1fr);gap:8px;}
+.toolkit-item {position:relative;gap:14px;min-height:72px;padding:12px 16px 12px 12px;background:#fff;border:1px solid #e8e7e2;border-radius:10px;overflow:hidden;}
+.toolkit-item::before {content:'';position:absolute;inset:0 auto 0 0;width:3px;background:var(--tool-accent);transform:scaleY(0);transform-origin:center;transition:transform .35s var(--ease);}
+.toolkit-mark {width:48px;height:48px;padding:7px;border-radius:12px;background:#fff;border:1px solid #e6e4dc;box-shadow:0 6px 14px -6px color-mix(in srgb,var(--tool-accent) 45%,transparent),inset 0 -2px 0 #f1f0ea;transition:transform .35s var(--ease);}
+.toolkit-photoshop .toolkit-mark,.toolkit-illustrator .toolkit-mark {padding:0;border:0;overflow:hidden;}
+.toolkit-text {display:grid;gap:3px;min-width:0;}
+.toolkit-name {font-size:15px;font-weight:700;letter-spacing:-.01em;color:#10152e;}
+.toolkit-role {font-size:13px;line-height:1.45;color:#5d6270;}
+@media(hover:hover) and (pointer:fine){.toolkit-item:hover::before {transform:scaleY(1);}.toolkit-item:hover .toolkit-mark {transform:scale(1.07) rotate(-3deg);}}
+.reveal-ready:not(.revealed) .toolkit-item {opacity:0;transform:translateY(12px);}
+.reveal-ready.revealed .toolkit-item {animation:toolkit-in .7s var(--ease) both;animation-delay:calc(var(--i)*70ms + 150ms);}
+@keyframes toolkit-in {from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+@media(max-width:1100px) and (min-width:801px){.about-toolkit {padding:22px 18px;}.toolkit-mark {width:42px;height:42px;}}
+@media(max-width:800px){.about-toolkit {padding:26px 22px;}.toolkit-name {font-size:16px;}.toolkit-role {font-size:15px;}}
+@media(max-width:360px){.about-toolkit {padding:20px 14px;}.toolkit-mark {width:42px;height:42px;}.toolkit-item {gap:10px;padding:10px;}}
+@media(prefers-reduced-motion:reduce){.reveal-ready.revealed .toolkit-item,.reveal-ready:not(.revealed) .toolkit-item {animation:none;opacity:1;transform:none;}.toolkit-item:hover .toolkit-mark {transform:none;}}
+
+/* Toolkit compact: side-by-side groups so the panel never outgrows the About copy. */
+@media(min-width:801px){
+ .about-toolkit {padding:18px 22px 18px;}
+ .about-toolkit>.toolkit-heading {margin-bottom:14px;padding-bottom:12px;}
+ .toolkit-heading h3 {font-size:21px;}
+ .about-toolkit>.toolkit-groups {grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start;}
+ .toolkit-group-head {flex-direction:column;align-items:flex-start;gap:2px;margin-bottom:10px;}
+ .toolkit-list {gap:8px;}
+ .toolkit-item {min-height:52px;gap:11px;padding:6px 10px 6px 6px;}
+ .toolkit-mark {width:38px;height:38px;padding:6px;border-radius:10px;}
+ .toolkit-role {display:none;}
+ .toolkit-name {font-size:14px;line-height:1.3;}
+}
+@media(max-width:1100px) and (min-width:801px){
+ .toolkit-mark {width:34px;height:34px;padding:5px;}
+ .toolkit-item {gap:8px;padding:8px;}
+ .toolkit-name {font-size:13px;}
 }
