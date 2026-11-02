@@ -144,7 +144,7 @@ function Contact({selectedService,setSelectedService,projectContext,onClearProje
     try{
       const res=await fetch(formspreeEndpoint,{method:'POST',body:data,headers:{Accept:'application/json'}});
       if(!res.ok)throw new Error('Formspree '+res.status);
-      form.elements.message.value='';setSent(true);
+      ['name','email','message'].forEach(field=>{form.elements[field].value='';});setSent(true);
     }catch{
       setDraft(url);setNotice('Your message could not be sent just now. Nothing was lost: use Copy inquiry, or open an email draft instead.');
     }finally{setSending(false);}
