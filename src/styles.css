@@ -267,6 +267,10 @@ section{scroll-margin-top:0}.section-heading{display:flex;justify-content:space-
 }
 
 /* Contact: readable guidance and a copy fallback for email drafts. */
+.contact-socials {display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+.contact-socials a {display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 11px;border:1px solid #ffffff50;border-radius:4px;font-size:12px;font-weight:650;transition:background .25s,border-color .25s;}
+.contact-socials a:hover {background:#ffffff18;border-color:#fff;}
+.contact-socials svg {color:#d6bf90;}
 .contact-form label {font-size:14px;line-height:1.6;}
 .form-heading>span {font-size:11px;}
 .form-heading #contact-instructions {font-size:15px;line-height:1.75;color:var(--muted);margin-top:14px;font-weight:400;}

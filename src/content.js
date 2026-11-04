@@ -1,6 +1,9 @@
 export const email = 'alfredtackiequaye@gmail.com';
 export const phone = '+233 240 791 866';
 export const whatsapp = 'https://wa.me/233240791866?text=Hello%20Alfred%2C%20I%27d%20like%20to%20discuss%20a%20project.';
+export const facebook = 'https://web.facebook.com/alfredq2003';
+export const instagram = 'https://www.instagram.com/alfredq2003/';
+export const linkedin = 'https://www.linkedin.com/in/alfred-tackie-quaye-93b28314b';
 export const studies = [
   {
     id:'brand', number:'01', name:'Cobalt', kind:'Brand identity concept', title:'Cobalt — Brand Identity Concept', category:'Brand identity', service:'Brand identity & graphic design', image:'/images/cobalt-brand.png',

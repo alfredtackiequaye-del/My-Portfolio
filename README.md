@@ -11,7 +11,7 @@ An independent comparison version of Alfred Tackie-Quaye’s portfolio, based on
 
 ## What works
 
-Responsive navigation with active-section feedback, concept-project dialogs, black-and-white portraits that reveal colour on hover or tap, expandable services with inquiry preselection, book previews, and direct email, phone, LinkedIn, GitHub, and WhatsApp links. Reduced-motion preferences are respected.
+Responsive navigation with active-section feedback, concept-project dialogs, black-and-white portraits that reveal colour on hover or tap, expandable services with inquiry preselection, book previews, and direct email, phone, Facebook, Instagram, LinkedIn, GitHub, and WhatsApp links. Reduced-motion preferences are respected.
 
 The inquiry form prepares a draft in the visitor’s email application. It does not send messages automatically or claim that delivery succeeded. No email API or secret is needed for this comparison prototype.
 
