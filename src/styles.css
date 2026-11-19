@@ -724,3 +724,85 @@ section{scroll-margin-top:0}.section-heading{display:flex;justify-content:space-
  .focus-ready .fw,.section-label.focus-ready,.section-watermark.focus-ready {opacity:1;filter:none;transform:none;animation:none!important;}
  .service summary:hover h3 {animation:none!important;}
 }
+
+/* ---------------------------------------------------------------------------
+   Section entrances in the same language as the home intro (Nov 2026):
+   things rise, start soft/blurred and sharpen. Fill mode "backwards" so each
+   element returns to its normal styles (hover, tilt, colour reveal) afterwards.
+   Driven by Reveal (.reveal-ready/.revealed) and useScrollFocus (.focus-ready/
+   .in-focus), both of which skip reduced-motion visitors.
+--------------------------------------------------------------------------- */
+.reveal-ready {filter:blur(8px);transition:opacity .7s var(--ease),transform .9s var(--ease),filter .9s var(--ease);}
+.reveal-ready.revealed {filter:none;}
+@keyframes sect-rise {from{opacity:0;filter:blur(10px);transform:translateY(26px);}}
+@keyframes sect-slide {from{opacity:0;filter:blur(8px);transform:translateX(-22px);}}
+
+/* About: portrait rises pale and soft, then sharpens; caption and benefits follow */
+.about-visual.reveal-ready {filter:none;transform:none;opacity:1;}
+.about-visual.reveal-ready:not(.revealed) .about-portrait {opacity:0;}
+.about-visual.revealed .about-portrait {animation:about-portrait-in 1.5s var(--ease) backwards;}
+.about-visual.revealed .portrait-caption {animation:sect-slide .9s var(--ease) .9s backwards;}
+@keyframes about-portrait-in {0%{opacity:0;filter:blur(16px) brightness(1.35);transform:translateY(70px);clip-path:inset(30% 0 0 0 round 4px);}55%{opacity:1;}100%{clip-path:inset(0 0 0 0 round 4px);}}
+.about-copy.revealed .lead {animation:sect-rise .9s var(--ease) .25s backwards;}
+.about-copy.revealed .about-benefits li {animation:sect-slide .8s var(--ease) backwards;}
+.about-copy.revealed .about-benefits li:nth-child(1) {animation-delay:.4s;}
+.about-copy.revealed .about-benefits li:nth-child(2) {animation-delay:.55s;}
+.about-copy.revealed .about-benefits li:nth-child(3) {animation-delay:.7s;}
+.about-copy.revealed .about-benefit-number {animation:sect-rise .8s var(--ease) .5s backwards;}
+.about-copy.revealed .about-approach {animation:sect-rise .9s var(--ease) .85s backwards;}
+.about-copy.revealed .about-actions {animation:sect-rise .9s var(--ease) 1s backwards;}
+
+/* Selected Work: image unveils from the bottom and settles from a soft zoom */
+.work-row.reveal-ready {filter:none;}
+.work-row.revealed .project-image {animation:work-unveil 1.2s var(--ease) backwards;}
+.work-row.revealed .project-image img {animation:work-zoom 1.6s var(--ease) backwards;}
+.work-row.revealed .project-copy > * {animation:sect-rise .9s var(--ease) backwards;}
+.work-row.revealed .project-copy > :nth-child(1) {animation-delay:.35s;}
+.work-row.revealed .project-copy > :nth-child(2) {animation-delay:.47s;}
+.work-row.revealed .project-copy > :nth-child(3) {animation-delay:.59s;}
+.work-row.revealed .project-copy > :nth-child(4) {animation-delay:.71s;}
+@keyframes work-unveil {from{clip-path:inset(100% 0 0 0);}to{clip-path:inset(0 0 0 0);}}
+@keyframes work-zoom {from{transform:scale(1.18);filter:blur(10px) saturate(.4);}}
+
+/* Services: number and icon arrive after each row */
+.service-list .revealed .service-number,.service-list .revealed .service-icon {animation:sect-rise .8s var(--ease) .25s backwards;}
+
+/* Process: a gold line draws across each step, numbers sharpen */
+.process-grid>.reveal {position:relative;}
+.process-grid>.reveal::before {position:absolute;top:-1px;left:0;right:0;height:1px;content:'';background:#c9a163;transform:scaleX(0);transform-origin:left;pointer-events:none;}
+.process-grid>.revealed::before {animation:line-draw 1.6s var(--ease) calc(var(--d,0) * 80ms + .1s) both;}
+.process-grid>.revealed .process-number {animation:sect-rise .8s var(--ease) calc(var(--d,0) * 80ms + .25s) backwards;}
+@keyframes line-draw {0%{transform:scaleX(0);opacity:1;}60%{transform:scaleX(1);opacity:1;}100%{transform:scaleX(1);opacity:0;}}
+
+/* Certificates: cards rise one after another */
+.credentials-grid.focus-ready .credential-card {opacity:0;}
+.credentials-grid.in-focus .credential-card {opacity:1;animation:sect-rise .9s var(--ease) backwards;}
+.credentials-grid.in-focus .credential-card:nth-child(2) {animation-delay:.12s;}
+.credentials-grid.in-focus .credential-card:nth-child(3) {animation-delay:.24s;}
+.credentials-grid.in-focus .credential-card:nth-child(4) {animation-delay:.36s;}
+
+/* Books: covers drop into place from a steeper tilt and sharpen */
+.books-grid .revealed .book-stage img {animation:cover-in 1.2s var(--ease) calc(var(--d,0) * 80ms + .15s) backwards;}
+@keyframes cover-in {from{opacity:0;filter:blur(10px);transform:translateY(46px) rotate(-14deg);}}
+
+/* Contact: steps, contact lines and form fields follow one after another */
+.next-steps ol.focus-ready li,.contact-links.focus-ready > * {opacity:0;}
+.next-steps ol.in-focus li,.contact-links.in-focus > * {opacity:1;animation:sect-slide .8s var(--ease) backwards;}
+.next-steps ol.in-focus li:nth-child(2),.contact-links.in-focus > :nth-child(2) {animation-delay:.12s;}
+.next-steps ol.in-focus li:nth-child(3),.contact-links.in-focus > :nth-child(3) {animation-delay:.24s;}
+.next-steps ol.in-focus li:nth-child(4) {animation-delay:.36s;}
+.revealed > .contact-form > * {animation:sect-rise .8s var(--ease) backwards;}
+.revealed > .contact-form > :nth-child(2) {animation-delay:.08s;}
+.revealed > .contact-form > :nth-child(3) {animation-delay:.16s;}
+.revealed > .contact-form > :nth-child(4) {animation-delay:.24s;}
+.revealed > .contact-form > :nth-child(5) {animation-delay:.32s;}
+.revealed > .contact-form > :nth-child(6) {animation-delay:.4s;}
+.revealed > .contact-form > :nth-child(n+7) {animation-delay:.48s;}
+
+/* The CTA band button lands after the words */
+.cta-band-title.in-focus + .cta-band-button {animation:sect-rise .9s var(--ease) .7s backwards;}
+
+@media(prefers-reduced-motion:reduce){
+ .reveal-ready,.about-visual .about-portrait,.credentials-grid .credential-card,.next-steps ol li,.contact-links > * {opacity:1!important;filter:none!important;}
+ .process-grid>.reveal::before {display:none;}
+}

@@ -109,7 +109,7 @@ export function useScrollFocus() {
         node.replaceWith(frag);
       });
     });
-    const targets = [...headings, ...document.querySelectorAll('main .section-label, .section-watermark')];
+    const targets = [...headings, ...document.querySelectorAll('main .section-label, .section-watermark, .credentials-grid, .next-steps ol, .contact-links')];
     targets.forEach(t => t.classList.add('focus-ready'));
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in-focus'); io.unobserve(e.target); }
