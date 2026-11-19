@@ -636,3 +636,91 @@ section{scroll-margin-top:0}.section-heading{display:flex;justify-content:space-
 .hero .hero-kicker,.about-benefit-number,.toolkit-group-head span {font-size:12px;}
 .hero-actions .button,.about-actions .button {font-size:14px;}
 @media(max-width:800px){.hero .hero-kicker {font-size:12px;}}
+
+/* ---------------------------------------------------------------------------
+   Home intro choreography (based on Alfred's reference video, Nov 2026):
+   empty stage → navigation settles in → headline focuses in from a blurred
+   outline and fills with colour → supporting copy rises → artwork fades up →
+   portrait rises from below, pale and soft, then sharpens → chips follow.
+   Transform, opacity and filter only. Disabled for reduced-motion users.
+--------------------------------------------------------------------------- */
+.site-header {animation:intro-header .9s var(--ease) .15s both;}
+.hero-kicker {animation:intro-focus 1s var(--ease) .35s both;}
+.hero-line {animation:intro-focus 1.15s var(--ease) both,intro-ink 1.9s var(--ease) both;}
+.hero-line:nth-child(1) {animation-delay:.5s,.5s;}
+.hero-line:nth-child(3) {animation-delay:.65s,.65s;}
+.hero-line:nth-child(5) {animation-delay:.8s,.8s;}
+.hero-line.hero-line-accent {animation:intro-focus 1.15s var(--ease) .95s both;}
+.hero-intro {animation:intro-rise 1s var(--ease) 1.3s both;}
+.hero-scene {animation:none;}
+.hero-art-frame {animation:intro-art 1.4s var(--ease) 1.25s both;}
+.hero-portrait-frame {animation:intro-portrait 1.5s var(--ease) 1.55s both;}
+.chip-brand {animation-delay:2.5s,2.5s;}
+.chip-ux {animation-delay:2.7s,3.9s;}
+.chip-data {animation-delay:2.9s,4.6s;}
+.hero-line-accent::after {animation-delay:2.1s;}
+.hero-shine {animation-delay:2.3s;}
+@keyframes intro-header {from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:none;}}
+@keyframes intro-focus {from{opacity:0;filter:blur(14px);transform:translateY(10px) scale(1.02);}to{opacity:1;filter:none;transform:none;}}
+@keyframes intro-ink {0%,45%{color:transparent;-webkit-text-stroke:1.5px #ffffffd9;}100%{color:#fff;-webkit-text-stroke:0 transparent;}}
+@keyframes intro-rise {from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+@keyframes intro-art {from{opacity:0;transform:scale(1.04);}to{opacity:1;transform:none;}}
+@keyframes intro-portrait {0%{opacity:0;filter:blur(16px) brightness(1.35);transform:translateY(70px);}55%{opacity:1;}100%{opacity:1;filter:none;transform:none;}}
+@media(prefers-reduced-motion:reduce){
+ .site-header,.hero-kicker,.hero-line,.hero-line.hero-line-accent,.hero-intro,.hero-art-frame,.hero-portrait-frame {animation:none;opacity:1;filter:none;transform:none;}
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll effects from Alfred's reference video (Nov 2026):
+   headings focus in word by word from a blur, section labels blur in with a
+   "/" prefix, service rows fill with cobalt on hover, a giant faint word sits
+   behind My Process, and a large "Have a project in mind?" band precedes Contact.
+--------------------------------------------------------------------------- */
+.section-label::after {content:none;}
+.section-label {gap:10px;}
+.section-label::before {content:'/';width:auto;height:auto;background:none;color:var(--gold);font-weight:800;letter-spacing:0;}
+
+.focus-ready .fw {display:inline-block;opacity:0;filter:blur(12px);transform:translateY(.25em);}
+.focus-ready.in-focus .fw {animation:word-focus .9s var(--ease) calc(var(--w) * 70ms + 80ms) both;}
+.section-label.focus-ready {opacity:0;filter:blur(8px);transform:translateX(-10px);}
+.section-label.focus-ready.in-focus {animation:label-focus .8s var(--ease) both;}
+@keyframes word-focus {to{opacity:1;filter:none;transform:none;}}
+@keyframes label-focus {to{opacity:1;filter:none;transform:none;}}
+
+/* Services: cobalt fill sweeps across a closed row, title rolls up, arrow turns */
+@media (hover:hover) and (pointer:fine) {
+ .service:not([open]) summary::before {background:var(--blue);transition:transform .5s var(--ease);}
+ .service:not([open]) summary {transition:color .35s;}
+ .service:not([open]) summary:hover {color:#fff;}
+ .service:not([open]) summary:hover::before {transform:scaleX(1);}
+ .service:not([open]) summary:hover p,.service:not([open]) summary:hover .service-preview {color:#dbe5ff!important;transition:color .35s;}
+ .service:not([open]) summary:hover .service-number,.service:not([open]) summary:hover .service-icon {color:#f4d9a4;}
+ .service:not([open]) summary:hover h3 {animation:title-roll .55s var(--ease);}
+ .expand-icon {transition:transform .45s var(--ease);}
+ .service:not([open]) summary:hover .expand-icon {transform:rotate(90deg);color:#f4d9a4;}
+ .service:not([open]) summary {padding-inline:20px;}
+}
+@keyframes title-roll {0%{transform:none;opacity:1;}40%{transform:translateY(-55%);opacity:0;}41%{transform:translateY(55%);opacity:0;}100%{transform:none;opacity:1;}}
+
+/* Giant faint word behind the dark Process section */
+.process-section {overflow:hidden;}
+.section-watermark {position:absolute;z-index:0;top:24px;right:-.04em;font-size:clamp(90px,17vw,260px);font-weight:800;line-height:.8;letter-spacing:-.06em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px #ffffff1f;pointer-events:none;user-select:none;white-space:nowrap;}
+.section-watermark.focus-ready {opacity:0;filter:blur(18px);transform:translateY(40px);}
+.section-watermark.focus-ready.in-focus {animation:label-focus 1.6s var(--ease) both;}
+@media(max-width:800px){.section-watermark {top:14px;font-size:88px;}}
+
+/* Closing call to action band */
+.cta-band {padding:110px 0 100px;background:var(--paper);border-top:1px solid #10152e14;}
+.cta-band .container {display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.cta-band-title {margin:0;font-size:clamp(48px,8.4vw,128px);font-weight:800;line-height:.95;letter-spacing:-.06em;text-transform:uppercase;color:var(--navy);}
+.cta-band-title em {font-style:normal;color:transparent;-webkit-text-stroke:2px var(--blue);}
+.cta-band-button {min-height:64px;padding:18px 34px;font-size:16px;background:var(--blue);color:#fff;}
+.cta-band-button:hover {background:#1039a6;}
+:root[data-theme='dark'] .cta-band {border-top-color:var(--line);}
+:root[data-theme='dark'] .cta-band-title em {-webkit-text-stroke-color:var(--accent);}
+@media(max-width:800px){.cta-band {padding:70px 0 64px;}.cta-band-title {font-size:clamp(44px,13vw,72px);}.cta-band-title em {-webkit-text-stroke-width:1.5px;}}
+
+@media(prefers-reduced-motion:reduce){
+ .focus-ready .fw,.section-label.focus-ready,.section-watermark.focus-ready {opacity:1;filter:none;transform:none;animation:none!important;}
+ .service summary:hover h3 {animation:none!important;}
+}

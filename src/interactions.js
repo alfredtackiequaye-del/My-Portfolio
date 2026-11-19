@@ -79,3 +79,42 @@ export function useInteractions() {
     };
   }, []);
 }
+
+/*
+ * Scroll focus (from the reference video): section headings come into focus
+ * word by word, from blurred to sharp, and section labels blur in, the first
+ * time they reach the viewport. Words stay real text for screen readers.
+ * Skipped for reduced motion; without JS everything is simply visible.
+ */
+export function useScrollFocus() {
+  useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const headings = [...document.querySelectorAll('main section h2[id$="-heading"], .cta-band-title')];
+    headings.forEach(h => {
+      if (h.dataset.split) return;
+      h.dataset.split = 'true';
+      let i = 0;
+      const walker = document.createTreeWalker(h, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => {
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.append(part); return; }
+          const w = document.createElement('span');
+          w.className = 'fw'; w.style.setProperty('--w', i++); w.textContent = part;
+          frag.append(w);
+        });
+        node.replaceWith(frag);
+      });
+    });
+    const targets = [...headings, ...document.querySelectorAll('main .section-label, .section-watermark')];
+    targets.forEach(t => t.classList.add('focus-ready'));
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in-focus'); io.unobserve(e.target); }
+    }), { threshold: .2, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(t => io.observe(t));
+    return () => io.disconnect();
+  }, []);
+}
