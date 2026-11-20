@@ -767,3 +767,22 @@ section{scroll-margin-top:0}.section-heading{display:flex;justify-content:space-
  .about-benefits li:hover h3 {animation:title-roll .55s var(--ease);}
 }
 @media(prefers-reduced-motion:reduce){.about-benefits li:hover h3 {animation:none!important;}.about-benefits li::before {transition:none;}}
+
+/* Quick home intro (Nov 2026): when the splash has just played, the same
+   choreography runs on a tighter timeline so the headline lands sooner.
+   html.intro-quick is only set when the splash plays (never for reduced motion). */
+html.intro-quick .site-header {animation-duration:.6s;animation-delay:0s;}
+html.intro-quick .hero-kicker {animation-duration:.6s;animation-delay:.05s;}
+html.intro-quick .hero-line {animation-duration:.7s,1s;}
+html.intro-quick .hero-line:nth-child(1) {animation-delay:.1s,.1s;}
+html.intro-quick .hero-line:nth-child(3) {animation-delay:.18s,.18s;}
+html.intro-quick .hero-line:nth-child(5) {animation-delay:.26s,.26s;}
+html.intro-quick .hero-line.hero-line-accent {animation-duration:.7s;animation-delay:.34s;}
+html.intro-quick .hero-intro {animation-duration:.7s;animation-delay:.45s;}
+html.intro-quick .hero-art-frame {animation-duration:.9s;animation-delay:.3s;}
+html.intro-quick .hero-portrait-frame {animation-duration:1s;animation-delay:.4s;}
+html.intro-quick .chip-brand {animation-delay:1s,1s;}
+html.intro-quick .chip-ux {animation-delay:1.15s,2.3s;}
+html.intro-quick .chip-data {animation-delay:1.3s,3s;}
+html.intro-quick .hero-line-accent::after {animation-delay:1s;}
+html.intro-quick .hero-shine {animation-delay:1.1s;}

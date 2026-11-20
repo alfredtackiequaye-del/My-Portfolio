@@ -18,10 +18,198 @@
   <meta name="twitter:title" content="Alfred Tackie-Quaye — Design + Data"/>
   <meta name="twitter:description" content="Brands people remember. Dashboards people actually use. Designer and Power BI professional, based in Ghana, working worldwide."/>
   <meta name="twitter:image" content="https://www.alfredtackiequaye.com/images/og-image.jpg"/>
+  <script>(function(){var d=document.documentElement,seen=false;try{seen=sessionStorage.getItem('atq-splash-seen')==='1'}catch(e){}if(seen||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('splash-active','intro-quick');['600','800'].forEach(function(w){var l=document.createElement('link');l.rel='preload';l.as='font';l.type='font/woff2';l.crossOrigin='anonymous';l.href='/fonts/manrope-latin-'+w+'.woff2';document.head.appendChild(l)})})()</script>
+  <style>
+    /* ATQ splash intro: shown once per browser session before the home page, then lifts away. */
+    @font-face{font-family:'ATQ Splash';src:url(/fonts/manrope-latin-600.woff2) format('woff2');font-weight:600;font-display:swap}
+    @font-face{font-family:'ATQ Splash';src:url(/fonts/manrope-latin-800.woff2) format('woff2');font-weight:800;font-display:swap}
+    #atq-splash{display:none}
+    html.splash-active,html.splash-active body{overflow:hidden}
+    html.splash-active #atq-splash,#atq-splash.out{display:block}
+    /* Hold the home intro animation until the splash has lifted. */
+    html.splash-active #root *,html.splash-active #root *::before,html.splash-active #root *::after{animation-play-state:paused!important}
+    #atq-splash{position:fixed;inset:0;z-index:2147483000;color:#fff;overflow:hidden;font-family:"ATQ Splash",Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(ellipse at center,#2a60d8 0%,#1648bd 62%);clip-path:inset(0 0 0 0);--gut:clamp(16px,4vw,56px)}
+    #atq-splash.out{clip-path:inset(0 0 100% 0);transition:clip-path .9s cubic-bezier(.77,0,.18,1)}
+    #atq-splash canvas{position:absolute;inset:0;width:100%;height:100%;contain:strict}
+    #atq-splash .sg{position:absolute;background:#c3d3ff;opacity:.2}
+    #atq-splash .sg.v{top:0;bottom:0;width:1px;transform:scaleY(0);transform-origin:top;animation:atq-gy .9s cubic-bezier(.22,1,.36,1) forwards;animation-delay:var(--d)}
+    #atq-splash .sg.h{left:0;right:0;height:1px;transform:scaleX(0);transform-origin:left;animation:atq-gx .9s cubic-bezier(.22,1,.36,1) forwards;animation-delay:var(--d)}
+    @keyframes atq-gy{to{transform:scaleY(1)}}
+    @keyframes atq-gx{to{transform:scaleX(1)}}
+    @keyframes atq-fade{to{opacity:1}}
+    #atq-splash .corner{position:absolute;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);opacity:0;animation:atq-fade .6s ease .15s forwards}
+    #atq-splash .corner b{color:#fff;font-weight:800}
+    #atq-splash .c-tl{top:24px;left:var(--gut)}
+    #atq-splash .c-tr{top:24px;right:var(--gut)}
+    #atq-splash .c-bl{bottom:30px;left:var(--gut)}
+    #atq-splash .skip{position:absolute;top:18px;left:50%;transform:translateX(-50%);height:32px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.04);color:#fff;font:800 11px/1 "ATQ Splash",Manrope,system-ui,sans-serif;letter-spacing:.18em;cursor:pointer;transition:background .3s,border-color .3s}
+    #atq-splash .skip:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.6)}
+    #atq-splash .skip:focus-visible{outline:2px solid #e2c48b;outline-offset:3px}
+    #atq-splash .word{position:absolute;left:0;right:0;top:62%;text-align:center;font-size:clamp(14px,1.6vw,20px);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.9);transition:opacity .22s ease,filter .22s ease,transform .22s ease}
+    #atq-splash .word.swap{opacity:0;filter:blur(8px);transform:translateY(-6px)}
+    #atq-splash .word.enter{opacity:0;filter:blur(8px);transform:translateY(6px);transition:none}
+    #atq-splash .counter{position:absolute;right:var(--gut);bottom:14px;font-size:clamp(56px,9vw,140px);font-weight:800;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+    #atq-splash .bar{position:absolute;left:0;bottom:0;height:3px;width:100%;background:linear-gradient(90deg,#c9a163,#8eb0ff);transform:scaleX(0);transform-origin:left}
+    @media(max-width:760px){#atq-splash .c-tl,#atq-splash .c-tr{top:68px}#atq-splash .c-bl{bottom:96px}#atq-splash .counter{font-size:64px}}
+  </style>
   <title>Alfred Tackie-Quaye — Design + Data</title>
 </head>
 <body>
+  <div id="atq-splash" role="dialog" aria-label="Loading Alfred Tackie-Quaye portfolio">
+    <span class="sg v" style="left:16.666%;--d:.05s" aria-hidden="true"></span>
+    <span class="sg v" style="left:33.333%;--d:.15s" aria-hidden="true"></span>
+    <span class="sg v" style="left:50%;--d:.25s" aria-hidden="true"></span>
+    <span class="sg v" style="left:66.666%;--d:.35s" aria-hidden="true"></span>
+    <span class="sg v" style="left:83.333%;--d:.45s" aria-hidden="true"></span>
+    <span class="sg h" style="top:25%;--d:.2s" aria-hidden="true"></span>
+    <span class="sg h" style="top:50%;--d:.3s" aria-hidden="true"></span>
+    <span class="sg h" style="top:75%;--d:.4s" aria-hidden="true"></span>
+    <canvas aria-hidden="true"></canvas>
+    <div class="corner c-tl" aria-hidden="true"><b>ATQ</b> — Design + Data</div>
+    <div class="corner c-tr" aria-hidden="true">Portfolio © 2026</div>
+    <div class="corner c-bl" aria-hidden="true">Accra, GH — Working worldwide</div>
+    <button class="skip" type="button">SKIP INTRO</button>
+    <div class="word" aria-hidden="true"></div>
+    <div class="counter" aria-hidden="true">000</div>
+    <div class="bar" aria-hidden="true"></div>
+  </div>
   <div id="root"></div>
+  <script>
+  (function () {
+    'use strict';
+    var root = document.documentElement;
+    var splash = document.getElementById('atq-splash');
+    if (!root.classList.contains('splash-active')) { splash.remove(); return; }
+    var canvas = splash.querySelector('canvas'), ctx = canvas.getContext('2d', { alpha: true });
+    var wordEl = splash.querySelector('.word'), counterEl = splash.querySelector('.counter'), barEl = splash.querySelector('.bar');
+    var WORDS = ['Brand', 'Dashboards', 'Alfred Tackie-Quaye'];
+    var FORM = 1.2, RIPPLE = 1.0, BURST = 0.5, TOTAL = FORM + RIPPLE + BURST, FLIGHT = FORM - 0.55;
+    var FONT = '"ATQ Splash", Manrope, system-ui, sans-serif';
+    // Per-dot data in flat typed arrays (no per-frame allocation).
+    var N = 0, TX, TY, SX, SY, DL, BX, BY, R = 2, nWhite = 0;
+    var W = 0, H = 0, t0 = 0, raf = 0, exiting = false, timers = [], rz = 0, lastPct = -1;
+    var PI2 = Math.PI * 2;
+
+    function build() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = innerWidth; H = innerHeight;
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var fs = Math.round(Math.min(W * (W < 600 ? 0.36 : 0.3), H * 0.4)), cy = H * 0.45;
+      // Render the monogram only into its own bounding box, then sample that region.
+      var bw = Math.ceil(Math.min(W, fs * 2.6)), bh = Math.ceil(fs * 1.1);
+      var ox = Math.round((W - bw) / 2), oy = Math.round(cy - bh / 2);
+      var off = document.createElement('canvas'); off.width = bw; off.height = bh;
+      var o = off.getContext('2d', { willReadFrequently: true });
+      o.fillStyle = '#fff'; o.textAlign = 'center'; o.textBaseline = 'middle';
+      o.font = '800 ' + fs + 'px ' + FONT;
+      o.fillText('ATQ', bw / 2, bh / 2);
+      var gap = Math.max(4, Math.round(fs / 38)), data = o.getImageData(0, 0, bw, bh).data;
+      var white = [], gold = [];
+      for (var y = 0; y < bh; y += gap) for (var x = 0; x < bw; x += gap) {
+        if (data[(y * bw + x) * 4 + 3] > 128) (Math.random() < 0.28 ? gold : white).push(ox + x, oy + y);
+      }
+      nWhite = white.length / 2;
+      var pts = white.concat(gold); N = pts.length / 2;
+      TX = new Float32Array(N); TY = new Float32Array(N); SX = new Float32Array(N); SY = new Float32Array(N);
+      DL = new Float32Array(N); BX = new Float32Array(N); BY = new Float32Array(N);
+      var reach = Math.hypot(W, H);
+      for (var i = 0; i < N; i++) {
+        var tx = pts[i * 2], ty = pts[i * 2 + 1], a = Math.random() * PI2, r = reach * (0.6 + Math.random() * 0.4);
+        var ba = Math.atan2(ty - cy, tx - W / 2) + (Math.random() - 0.5) * 0.8, bv = 180 + Math.random() * 520;
+        TX[i] = tx; TY[i] = ty;
+        SX[i] = W / 2 + Math.cos(a) * r; SY[i] = H / 2 + Math.sin(a) * r;
+        DL[i] = Math.random() * 0.4 + (tx / W) * 0.15;
+        BX[i] = Math.cos(ba) * bv; BY[i] = Math.sin(ba) * bv;
+      }
+      R = gap * 0.34;
+      wordEl.style.top = Math.min(H - 120, cy + fs * 0.42 + 22) + 'px';
+    }
+
+    function draw(from, to, t, color) {
+      var i, k, x, y;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      if (t < FORM) {
+        for (i = from; i < to; i++) {
+          k = (t - DL[i]) / FLIGHT; k = k <= 0 ? 0 : k >= 1 ? 1 : 1 - Math.pow(1 - k, 4);
+          x = SX[i] + (TX[i] - SX[i]) * k; y = SY[i] + (TY[i] - SY[i]) * k;
+          ctx.moveTo(x + R, y); ctx.arc(x, y, R, 0, PI2);
+        }
+      } else if (t < FORM + RIPPLE) {
+        var rt = t - FORM, env = 4 * Math.sin(rt / RIPPLE * Math.PI);
+        for (i = from; i < to; i++) {
+          x = TX[i]; y = TY[i] + Math.sin(rt * 9 + x * 0.025) * env;
+          ctx.moveTo(x + R, y); ctx.arc(x, y, R, 0, PI2);
+        }
+      } else {
+        k = Math.min(1, (t - FORM - RIPPLE) / BURST); k = 1 - Math.pow(1 - k, 3);
+        for (i = from; i < to; i++) {
+          x = TX[i] + BX[i] * k; y = TY[i] + BY[i] * k;
+          ctx.moveTo(x + R, y); ctx.arc(x, y, R, 0, PI2);
+        }
+      }
+      ctx.fill();
+    }
+
+    function frame(now) {
+      var t = (now - t0) / 1000;
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalAlpha = t < FORM + RIPPLE ? 1 : Math.max(0, 1 - (t - FORM - RIPPLE) / BURST);
+      draw(0, nWhite, t, '#fff');
+      draw(nWhite, N, t, '#e2c48b');
+      var prog = Math.min(1, t / TOTAL), pct = Math.round(prog * 100);
+      if (pct !== lastPct) { lastPct = pct; counterEl.textContent = pct < 10 ? '00' + pct : pct < 100 ? '0' + pct : '100'; }
+      barEl.style.transform = 'scaleX(' + prog + ')';
+      if (t >= TOTAL) { exit(); return; }
+      raf = requestAnimationFrame(frame);
+    }
+
+    function cycleWords() {
+      WORDS.forEach(function (w, i) {
+        timers.push(setTimeout(function () {
+          function show() { wordEl.textContent = w; wordEl.classList.remove('swap'); wordEl.classList.add('enter'); void wordEl.offsetWidth; wordEl.classList.remove('enter'); }
+          if (i === 0) show(); else { wordEl.classList.add('swap'); timers.push(setTimeout(show, 200)); }
+        }, 120 + i * 650));
+      });
+    }
+
+    function onResize() { clearTimeout(rz); rz = setTimeout(build, 150); }
+    function onKey(e) { if (e.key === 'Escape') exit(); }
+
+    function exit() {
+      if (exiting) return;
+      exiting = true;
+      cancelAnimationFrame(raf); timers.forEach(clearTimeout);
+      removeEventListener('resize', onResize); removeEventListener('keydown', onKey);
+      counterEl.textContent = '100'; barEl.style.transform = 'scaleX(1)';
+      splash.classList.add('out');
+      try { sessionStorage.setItem('atq-splash-seen', '1'); } catch (e) {}
+      root.classList.remove('splash-active'); // home intro starts while the splash lifts
+      var done = false;
+      function finish() {
+        if (done) return; done = true;
+        splash.remove();
+        if (location.hash) { var target = document.getElementById(location.hash.slice(1)); if (target) target.scrollIntoView(); }
+      }
+      splash.addEventListener('transitionend', function (e) { if (e.propertyName === 'clip-path') finish(); });
+      setTimeout(finish, 1050);
+    }
+
+    splash.querySelector('.skip').addEventListener('click', exit);
+    addEventListener('keydown', onKey);
+    function start() {
+      if (exiting) return;
+      build(); cycleWords();
+      t0 = performance.now(); raf = requestAnimationFrame(frame);
+      addEventListener('resize', onResize);
+    }
+    var ready = document.fonts && document.fonts.load
+      ? Promise.race([document.fonts.load('800 100px ' + FONT), new Promise(function (r) { setTimeout(r, 400); })])
+      : Promise.resolve();
+    ready.catch(function () {}).then(start);
+  })();
+  </script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
