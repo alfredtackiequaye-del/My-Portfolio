@@ -755,3 +755,15 @@ section{scroll-margin-top:0}.section-heading{display:flex;justify-content:space-
 @media(prefers-reduced-motion:reduce){
  .reveal-ready,.about-visual .about-portrait {opacity:1!important;filter:none!important;transform:none!important;}
 }
+
+/* About benefits use the Services hover: cobalt sweep, title roll, white/gold text */
+@media (hover:hover) and (pointer:fine) {
+ .about-benefits li {position:relative;isolation:isolate;padding-inline:14px;transition:color .35s;}
+ .about-benefits li::before {position:absolute;inset:0;z-index:-1;content:'';background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);}
+ .about-benefits li:hover {color:#fff;}
+ .about-benefits li:hover::before {transform:scaleX(1);}
+ .about-benefits li:hover p {color:#dbe5ff!important;transition:color .35s;}
+ .about-benefits li:hover .about-benefit-number {color:#f4d9a4;}
+ .about-benefits li:hover h3 {animation:title-roll .55s var(--ease);}
+}
+@media(prefers-reduced-motion:reduce){.about-benefits li:hover h3 {animation:none!important;}.about-benefits li::before {transition:none;}}
